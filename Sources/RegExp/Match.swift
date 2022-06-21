@@ -29,7 +29,7 @@ public protocol MatchGroupsProtocol {
     subscript(index: Int) -> String? {get}
     
     /**
-     * Takes a subgroup match substring by name. This will work if you supplied subgroup names while creating Regex.
+     * Takes a subgroup match substring by name. This will work if you supplied subgroup names while creating RegExp.
      
      - parameter name: Name of subgroup to match to.
      - returns: A substring or nil if the supplied subgroup does not exist.
@@ -76,7 +76,7 @@ struct MatchGroups : MatchGroupsProtocol {
  */
 public class Match : MatchProtocol {
     /**
-     * The original string supplied to Regex for matching
+     * The original string supplied to RegExp for matching
      */
     public let source:String
     
@@ -134,7 +134,7 @@ public class Match : MatchProtocol {
     }
     
     /**
-     * Takes a subgroup match range by name. This will work if you supplied subgroup names while creating Regex.
+     * Takes a subgroup match range by name. This will work if you supplied subgroup names while creating RegExp.
      
      - parameter name: Name of subgroup to match to.
      - returns: A range or nil if the supplied subgroup does not exist.
@@ -192,7 +192,7 @@ public class Match : MatchProtocol {
     }
     
     /**
-     * Takes a subgroup match substring by name. This will work if you supplied subgroup names while creating Regex.
+     * Takes a subgroup match substring by name. This will work if you supplied subgroup names while creating RegExp.
      
      - parameter name: Name of subgroup to match to.
      - returns: A substring or nil if the supplied subgroup does not exist.

@@ -1,4 +1,4 @@
-//===--- RegexOptions.swift ------------------------------------------------------===//
+//===--- RegExpOptions.swift ------------------------------------------------------===//
 //Copyright (c) 2016 Daniel Leping (dileping)
 //
 //Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Options that can be used to modify the default Regex behaviour.
- Can be user while the Regex is constructed.
+ Options that can be used to modify the default RegExp behaviour.
+ Can be user while the RegExp is constructed.
  
- - see: Regex.init
+ - see: RegExp.init
  */
-public struct RegexOptions : OptionSet {
+public struct RegExpOptions : OptionSet {
     /**
      Required by OptionSet protocol. Can be used to obtain integer value of a flag set
     */
@@ -39,43 +39,43 @@ public struct RegexOptions : OptionSet {
     /**
      * Match letters in the pattern independent of case.
      */
-    public static let caseInsensitive = RegexOptions(rawValue: 1)
+    public static let caseInsensitive = RegExpOptions(rawValue: 1)
     
     /**
      * Ignore whitespace and #-prefixed comments in the pattern.
      */
-    public static let allowCommentsAndWhitespace = RegexOptions(rawValue: 2)
+    public static let allowCommentsAndWhitespace = RegExpOptions(rawValue: 2)
     
     /**
      * Treat the entire pattern as a literal string.
      */
-    public static let ignoreMetacharacters = RegexOptions(rawValue: 4)
+    public static let ignoreMetacharacters = RegExpOptions(rawValue: 4)
     
     /**
      * Allow . to match any character, including line separators.
      */
-    public static let dotMatchesLineSeparators = RegexOptions(rawValue: 8)
+    public static let dotMatchesLineSeparators = RegExpOptions(rawValue: 8)
     
     /**
      * Allow ^ and $ to match the start and end of lines.
      */
-    public static let anchorsMatchLines = RegexOptions(rawValue: 16)
+    public static let anchorsMatchLines = RegExpOptions(rawValue: 16)
     
     /**
      * Treat only \n as a line separator (otherwise, all standard line separators are used).
      */
-    public static let useUnixLineSeparators = RegexOptions(rawValue: 32)
+    public static let useUnixLineSeparators = RegExpOptions(rawValue: 32)
     
     /**
      * Use Unicode TR#29 to specify word boundaries (otherwise, traditional regular expression word boundaries are used).
      */
-    public static let useUnicodeWordBoundaries = RegexOptions(rawValue: 64)
+    public static let useUnicodeWordBoundaries = RegExpOptions(rawValue: 64)
     
     
     /**
-     * Options used by default in Regex
+     * Options used by default in RegExp
      */
-    public static let `default`:RegexOptions = [caseInsensitive]
+    public static let `default`:RegExpOptions = [caseInsensitive]
 }
 
 /**
@@ -93,9 +93,9 @@ extension NSRegularExpression.Options : Hashable {
 }
 
 /**
- * Allows to RegexOptions to be used as keys for Dictionaries. Required for internal implementation.
+ * Allows to RegExpOptions to be used as keys for Dictionaries. Required for internal implementation.
  */
-extension RegexOptions : Hashable {
+extension RegExpOptions : Hashable {
     /**
      * Required by Hashable
      */
@@ -106,7 +106,7 @@ extension RegexOptions : Hashable {
     }
 }
 
-private let nsToRegexOptionsMap:[NSRegularExpression.Options: RegexOptions] = [
+private let nsToRegExpOptionsMap:[NSRegularExpression.Options: RegExpOptions] = [
     .caseInsensitive:.caseInsensitive,
     .allowCommentsAndWhitespace:.allowCommentsAndWhitespace,
     .ignoreMetacharacters:.ignoreMetacharacters,
@@ -116,13 +116,13 @@ private let nsToRegexOptionsMap:[NSRegularExpression.Options: RegexOptions] = [
     .useUnicodeWordBoundaries:.useUnicodeWordBoundaries
 ]
 
-private let regexToNSOptionsMap:[RegexOptions: NSRegularExpression.Options] = nsToRegexOptionsMap.reduce([:]) { (dict, kv) in
+private let regexToNSOptionsMap:[RegExpOptions: NSRegularExpression.Options] = nsToRegExpOptionsMap.reduce([:]) { (dict, kv) in
     var dict = dict
     dict[kv.value] = kv.key
     return dict
 }
 
-extension RegexOptions {
+extension RegExpOptions {
     var ns: NSRegularExpression.Options {
         get {
             let nsSeq = regexToNSOptionsMap.filter { (regex, _) in
@@ -137,15 +137,15 @@ extension RegexOptions {
 }
 
 extension NSRegularExpression.Options {
-    var regex:RegexOptions {
+    var regex:RegExpOptions {
         get {
-            let regexSeq = nsToRegexOptionsMap.filter { (ns, _) in
+            let regexSeq = nsToRegExpOptionsMap.filter { (ns, _) in
                 self.contains(ns)
             }.map { (_, regex) in
                 regex
             }
             
-            return RegexOptions(regexSeq)
+            return RegExpOptions(regexSeq)
         }
     }
 }

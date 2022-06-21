@@ -1,4 +1,4 @@
-//===--- RegexTests.swift -------------------------------------------------===//
+//===--- RegExpTests.swift -------------------------------------------------===//
 //Copyright (c) 2016 Daniel Leping (dileping)
 //
 //Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +15,11 @@
 //===----------------------------------------------------------------------===//
 
 import XCTest
-@testable import Regex
+@testable import RegExp
 
-class RegexTests: XCTestCase {
+class RegExpTests: XCTestCase {
     static let pattern:String = "(.+?)([1,2,3]*)(.*)"
-    let regex:RegexProtocol = try! Regex(pattern:RegexTests.pattern, groupNames:"letter", "digits", "rest")
+    let regex:RegExpProtocol = try! RegExp(pattern:RegExpTests.pattern, groupNames:"letter", "digits", "rest")
     let source = "l321321alala"
     let letter = "l"
     let digits = "321321"
@@ -34,10 +34,10 @@ class RegexTests: XCTestCase {
     func testMatches() {
         XCTAssert(regex.matches(source))
         XCTAssert(source =~ regex)
-        XCTAssert(source =~ RegexTests.pattern)
+        XCTAssert(source =~ RegExpTests.pattern)
         
         XCTAssertFalse(source !~ regex)
-        XCTAssertFalse(source !~ RegexTests.pattern)
+        XCTAssertFalse(source !~ RegExpTests.pattern)
     }
     
     func testSwitch() {
@@ -59,7 +59,7 @@ class RegexTests: XCTestCase {
     }
     
     func testSimple() {
-        XCTAssertEqual(RegexTests.pattern.r?.findFirst(in: source)?.group(at: 2), digits)
+        XCTAssertEqual(RegExpTests.pattern.r?.findFirst(in: source)?.group(at: 2), digits)
     }
     
     func _test(group name:String, reference:String) {
@@ -139,7 +139,7 @@ class RegexTests: XCTestCase {
         let testString = """
             👍👍 Find me. 👌👨‍👩‍👧👨\u{200D}👩\u{200D}👧👌
             """
-        let regex = try! Regex(pattern: "^(👍+) *([^👌]+?) *([👌👨‍👩‍👧]+)$",
+        let regex = try! RegExp(pattern: "^(👍+) *([^👌]+?) *([👌👨‍👩‍👧]+)$",
                                options: [.anchorsMatchLines],
                                groupNames: [])
 
@@ -167,9 +167,9 @@ class RegexTests: XCTestCase {
                   "Incorrect third capture group for anchored regex.")
 
 
-        let familyEmojiRegex = try! Regex(pattern: "👌([👨‍👩‍👧]+)",
+        let familyEmojiRegExp = try! RegExp(pattern: "👌([👨‍👩‍👧]+)",
                                           groupNames: [])
-        guard let familyFirstMatch = familyEmojiRegex.findFirst(in: testString) else {
+        guard let familyFirstMatch = familyEmojiRegExp.findFirst(in: testString) else {
             return XCTFail("Failed to find first match using family regex.")
         }
         XCTAssert(familyFirstMatch.matched == "👌👨‍👩‍👧👨‍👩‍👧",
@@ -180,8 +180,8 @@ class RegexTests: XCTestCase {
 
         let testInArabic = "اختبار"
         let arabicTestString = "🇦🇪 مرحبًا ، هذا اختبار"
-        let arabicRegex = try! Regex(pattern: testInArabic, groupNames: [])
-        let arabicMatchSequence = arabicRegex.findAll(in: arabicTestString)
+        let arabicRegExp = try! RegExp(pattern: testInArabic, groupNames: [])
+        let arabicMatchSequence = arabicRegExp.findAll(in: arabicTestString)
         XCTAssert(arabicMatchSequence.context.count == 1, "Failed to find match in Arabic test string.")
         let arabicFirstMatch = arabicMatchSequence.makeIterator().next()!
         XCTAssert(arabicFirstMatch.matched == testInArabic, "Failed to match Arabic.")
@@ -189,8 +189,8 @@ class RegexTests: XCTestCase {
 
         let testInThai = "ทดสอบ"
         let thaiTestString = "🇹🇭 สวัสดีนี่เป็นแบบทดสอบ"
-        let thaiRegex = try! Regex(pattern: testInThai, groupNames: [])
-        let thaiMatchSequence = thaiRegex.findAll(in: thaiTestString)
+        let thaiRegExp = try! RegExp(pattern: testInThai, groupNames: [])
+        let thaiMatchSequence = thaiRegExp.findAll(in: thaiTestString)
         XCTAssert(thaiMatchSequence.context.count == 1, "Failed to find match in Thai test string.")
         let thaiFirstMatch = thaiMatchSequence.makeIterator().next()!
         XCTAssert(thaiFirstMatch.matched == testInThai, "Failed to match Thai.")
@@ -255,8 +255,8 @@ class RegexTests: XCTestCase {
 }
 
 #if os(Linux)
-extension RegexTests {
-	static var allTests : [(String, (RegexTests) -> () throws -> Void)] {
+extension RegExpTests {
+	static var allTests : [(String, (RegExpTests) -> () throws -> Void)] {
 		return [
 			("testMatches", testMatches),
 			("testSwitch", testSwitch),

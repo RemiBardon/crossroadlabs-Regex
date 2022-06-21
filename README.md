@@ -1,11 +1,11 @@
 [![by Crossroad Labs](./header.png)](http://www.crossroadlabs.xyz/)
 
-# Regex
+# RegExp
 
 ![🐧 linux: ready](https://img.shields.io/badge/%F0%9F%90%A7%20linux-ready-red.svg)
-[![GitHub license](https://img.shields.io/badge/license-Apache%202.0-lightgrey.svg)](https://raw.githubusercontent.com/crossroadlabs/Regex/master/LICENSE)
-[![Build Status](https://travis-ci.org/crossroadlabs/Regex.svg?branch=master)](https://travis-ci.org/crossroadlabs/Regex)
-[![GitHub release](https://img.shields.io/github/release/crossroadlabs/Regex.svg)](https://github.com/crossroadlabs/Regex/releases)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202.0-lightgrey.svg)](https://raw.githubusercontent.com/RemiBardon/crossroadlabs-Regex/master/LICENSE)
+[![Build Status](https://travis-ci.org/RemiBardon/crossroadlabs-Regex.svg?branch=master)](https://travis-ci.org/RemiBardon/crossroadlabs-Regex)
+[![GitHub release](https://img.shields.io/github/release/RemiBardon/crossroadlabs-Regex.svg)](https://github.com/RemiBardon/crossroadlabs-Regex/releases)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods version](https://img.shields.io/cocoapods/v/CrossroadRegex.svg)](https://cocoapods.org/pods/CrossroadRegex)
 ![Platform OS X | iOS | tvOS | watchOS | Linux](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X%20%7C%20iOS%20%7C%20tvOS%20%7C%20watchOS-orange.svg)
@@ -14,7 +14,7 @@
 
 ## Goals
 
-[<img align="left" src="https://raw.githubusercontent.com/crossroadlabs/Express/master/logo-full.png" hspace="20" height=128>](https://github.com/crossroadlabs/Express) Regex library was mainly introduced to fulfill the needs of [Swift Express](https://github.com/crossroadlabs/Express) - web application server side framework for Swift.
+[<img align="left" src="https://raw.githubusercontent.com/crossroadlabs/Express/master/logo-full.png" hspace="20" height=128>](https://github.com/crossroadlabs/Express) RegExp library was mainly introduced to fulfill the needs of [Swift Express](https://github.com/crossroadlabs/Express) - web application server side framework for Swift.
 
 Still we hope it will be useful for everybody else.
 
@@ -39,7 +39,7 @@ Still we hope it will be useful for everybody else.
 
 ## Extra
 
-Path to Regex converter is available as a separate library here: [PathToRegex](https://github.com/crossroadlabs/PathToRegex)
+Path to RegExp converter is available as a separate library here: [PathToRegex](https://github.com/crossroadlabs/PathToRegex)
 
 This one allows using path patterns like `/folder/*/:file.txt` or `/route/:one/:two` to be converted to Regular Expressions and matched against strings.
 
@@ -52,7 +52,7 @@ This one allows using path patterns like `/folder/*/:file.txt` or `/route/:one/:
 Add the following dependency to your [Package.swift](https://github.com/apple/swift-package-manager/blob/master/Documentation/Usage.md#define-dependencies):
 
 ```swift
-.Package(url: "https://github.com/crossroadlabs/Regex.git", majorVersion: 1)
+.Package(url: "https://github.com/RemiBardon/crossroadlabs-Regex.git", majorVersion: 1)
 ```
 
 Run ```swift build``` and build your app.
@@ -70,7 +70,7 @@ Make sure that you are integrating your dependencies using frameworks: add `use_
 Add the following to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile):
 
 ```
-github "crossroadlabs/Regex"
+github "RemiBardon/crossroadlabs-Regex"
 ```
 
 Run `carthage update` and follow the steps as described in Carthage's [README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
@@ -81,7 +81,7 @@ Run `carthage update` and follow the steps as described in Carthage's [README](h
 
 ### Examples
 
-#### Hello Regex:
+#### Hello RegExp:
 
 All the lines below are identical and represent simple matching. All operators and `matches` function return Bool
 
@@ -103,7 +103,7 @@ Operator `!~` returns `true` if expression does **NOT** match:
 
 #### Swift Pattern Matching (aka `switch` keyword)
 
-Regex provides very deep integration with Swift and can be used with the switch keyword in the following way:
+RegExp provides very deep integration with Swift and can be used with the switch keyword in the following way:
 
 ```swift
 let letter = "a"
@@ -151,7 +151,7 @@ let digits = "(.+?)([123]*)(.*)".r?.findFirst(in: "l321321alala")?.group(at: 2)
 #### Named groups:
 
 ```swift
-let regex:RegexType = try Regex(pattern:"(.+?)([123]*)(.*)",
+let regex:RegExpProtocol = try RegExp(pattern:"(.+?)([123]*)(.*)",
                                         groupNames:"letter", "digits", "rest")
 let match = regex.findFirst(in: "l321321alala")
 if let match = match {
@@ -208,6 +208,6 @@ You can view the [CHANGELOG](./CHANGELOG.md) as a separate document [here](./CHA
 
 ## Contributing
 
-To get started, <a href="https://www.clahub.com/agreements/crossroadlabs/Regex">sign the Contributor License Agreement</a>.
+To get started, <a href="https://www.clahub.com/agreements/RemiBardon/crossroadlabs-Regex">sign the Contributor License Agreement</a>.
 
 ## [![Crossroad Labs](http://i.imgur.com/iRlxgOL.png?1) by Crossroad Labs](http://www.crossroadlabs.xyz/)

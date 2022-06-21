@@ -1,4 +1,4 @@
-//===--- String+Regex.swift -----------------------------------------------===//
+//===--- String+RegExp.swift -----------------------------------------------===//
 //Copyright (c) 2016 Daniel Leping (dileping)
 //
 //Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,26 +15,26 @@
 //===----------------------------------------------------------------------===//
 
 /**
- * Adds Regex extensions to String
+ * Adds RegExp extensions to String
  */
 public extension String {
     /**
      * Creates a regex using this string as a pattern. Can return nil if pattern is invalid.
      */
-    var r : Regex? {
+    var r : RegExp? {
         get {
-            return try? Regex(pattern: self)
+            return try? RegExp(pattern: self)
         }
     }
     
     /**
-     An inverse alias to Regex.split
+     An inverse alias to RegExp.split
      
      - parameters:
-       - regex: Regex to split the string with
-     - returns: An array. See Regex.split for more details.
+       - regex: RegExp to split the string with
+     - returns: An array. See RegExp.split for more details.
      */
-    func split(using regex:RegexProtocol?) -> [String] {
+    func split(using regex:RegExpProtocol?) -> [String] {
         guard let regex = regex else {
             return [self]
         }
@@ -48,13 +48,13 @@ infix operator !~ : ComparisonPrecedence
 /**
  Syntactic sugar for pattern matching. Used as "ABC" =~ ".*".r
  
- - see: Regex.matches for more details.
+ - see: RegExp.matches for more details.
  - parameters:
    - source: String to match
-   - regex: Regex to match the string with
+   - regex: RegExp to match the string with
  - returns: True if matches, false otherwise
  */
-public func =~(source:String, regex:RegexProtocol?) -> Bool {
+public func =~(source:String, regex:RegExpProtocol?) -> Bool {
     guard let matches = regex?.matches(source) else {
         return false
     }
@@ -63,9 +63,9 @@ public func =~(source:String, regex:RegexProtocol?) -> Bool {
 
 /**
  Syntactic sugar for pattern matching. Used as "ABC" =~ ".*"
- Regex is automatically created from the second string.
+ RegExp is automatically created from the second string.
  
- - see: Regex.matches for more details
+ - see: RegExp.matches for more details
  - parameters:
    - source: String to match
    - regex: Pattern string to match the string with
@@ -79,13 +79,13 @@ public func =~(source:String, pattern:String) -> Bool {
  Syntactic sugar for pattern matching. Used as "ABC" !~ ".*".r
  Basically is negation of =~ operator.
  
- - see: Regex.matches for more details
+ - see: RegExp.matches for more details
  - parameters:
    - source: String to match
-   - regex: Regex to match the string with
+   - regex: RegExp to match the string with
  - returns: False if matches, true otherwise
  */
-public func !~(source:String, regex:RegexProtocol?) -> Bool {
+public func !~(source:String, regex:RegExpProtocol?) -> Bool {
     return !(source =~ regex)
 }
 
@@ -93,9 +93,9 @@ public func !~(source:String, regex:RegexProtocol?) -> Bool {
  Syntactic sugar for pattern matching. Used as "ABC" =~ ".*"
  Basically is negation of =~ operator.
  
- Regex is automatically created from the second string.
+ RegExp is automatically created from the second string.
  
- - see: Regex.matches for more details
+ - see: RegExp.matches for more details
  - parameters:
    - source: String to match
    - regex: Pattern string to match the string with
@@ -120,6 +120,6 @@ public func !~(source:String, pattern:String) -> Bool {
  
  - returns: True if matches, false otherwise
  */
-public func ~=(regex:RegexProtocol?, source:String) -> Bool {
+public func ~=(regex:RegExpProtocol?, source:String) -> Bool {
     return source =~ regex
 }

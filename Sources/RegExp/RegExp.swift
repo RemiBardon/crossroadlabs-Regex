@@ -1,4 +1,4 @@
-//===--- Regex.swift ------------------------------------------------------===//
+//===--- RegExp.swift ------------------------------------------------------===//
 //Copyright (c) 2016 Daniel Leping (dileping)
 //
 //Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,12 +21,12 @@ import Foundation
  *
  * Makes it easier to maintain two implementations
  */
-public protocol RegexProtocol {
+public protocol RegExpProtocol {
     /**
      Constructor, same as main, more lightweight (omits options). Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
+       - pattern: A pattern to be used with RegExp
        - groupNames: Group names to be used for matching
      */
     init(pattern:String, groupNames:[String]) throws
@@ -36,7 +36,7 @@ public protocol RegexProtocol {
      Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
+       - pattern: A pattern to be used with RegExp
        - groupNames: Group names to be used for matching
      */
     init(pattern:String, groupNames:String...) throws
@@ -45,24 +45,24 @@ public protocol RegexProtocol {
      Main constructor. Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
-       - options: RegexOptions, i.e. case sensitivity, etc.
+       - pattern: A pattern to be used with RegExp
+       - options: RegExpOptions, i.e. case sensitivity, etc.
        - groupNames: Group names to be used for matching
      */
-    init(pattern:String, options:RegexOptions, groupNames:[String]) throws
+    init(pattern:String, options:RegExpOptions, groupNames:[String]) throws
     
     /**
      Constructor, same as main, but group names can be supplied as var args. Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
-       - options: RegexOptions, i.e. case sensitivity, etc.
+       - pattern: A pattern to be used with RegExp
+       - options: RegExpOptions, i.e. case sensitivity, etc.
        - groupNames: Group names to be used for matching
      */
-    init(pattern:String, options:RegexOptions, groupNames:String...) throws
+    init(pattern:String, options:RegExpOptions, groupNames:String...) throws
     
     /**
-     * Pattern used to create this Regex
+     * Pattern used to create this RegExp
      */
     var pattern:String {get}
     
@@ -152,9 +152,9 @@ public protocol RegexProtocol {
 /**
  * Regular Expression
  */
-public class Regex : RegexProtocol {
+public class RegExp : RegExpProtocol {
     /**
-     * Pattern used to create this Regex
+     * Pattern used to create this RegExp
      */
     public let pattern:String
     
@@ -168,11 +168,11 @@ public class Regex : RegexProtocol {
      Main constructor. Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
-       - options: RegexOptions, i.e. case sensitivity, etc.
+       - pattern: A pattern to be used with RegExp
+       - options: RegExpOptions, i.e. case sensitivity, etc.
        - groupNames: Group names to be used for matching
      */
-    public required init(pattern:String, options:RegexOptions, groupNames:[String]) throws {
+    public required init(pattern:String, options:RegExpOptions, groupNames:[String]) throws {
         self.pattern = pattern
         self.groupNames = groupNames
         do {
@@ -187,11 +187,11 @@ public class Regex : RegexProtocol {
      Constructor, same as main, but group names can be supplied as var args. Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
-       - options: RegexOptions, i.e. case sensitivity, etc.
+       - pattern: A pattern to be used with RegExp
+       - options: RegExpOptions, i.e. case sensitivity, etc.
        - groupNames: Group names to be used for matching
      */
-    public required convenience init(pattern:String, options:RegexOptions, groupNames:String...) throws {
+    public required convenience init(pattern:String, options:RegExpOptions, groupNames:String...) throws {
         try self.init(pattern:pattern, options: options, groupNames:groupNames)
     }
     
@@ -199,7 +199,7 @@ public class Regex : RegexProtocol {
      Constructor, same as main, more lightweight (omits options). Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
+       - pattern: A pattern to be used with RegExp
        - groupNames: Group names to be used for matching
      */
     public required convenience init(pattern: String, groupNames: [String]) throws {
@@ -211,14 +211,14 @@ public class Regex : RegexProtocol {
      Can throw an error.
      
      - parameters:
-       - pattern: A pattern to be used with Regex
+       - pattern: A pattern to be used with RegExp
        - groupNames: Group names to be used for matching
      */
     public required convenience init(pattern: String, groupNames: String...) throws {
         try self.init(pattern:pattern, groupNames:groupNames)
     }
     
-    private static func compile(pattern:String, options:RegexOptions) throws -> CompiledPattern {
+    private static func compile(pattern:String, options:RegExpOptions) throws -> CompiledPattern {
         //pass options
         return try NSRegularExpression(pattern: pattern, options: options.ns)
     }

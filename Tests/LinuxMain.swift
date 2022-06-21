@@ -16,10 +16,10 @@
 
 import XCTest
 
-import RegexTests
+import RegExpTests
 
 var tests = [XCTestCaseEntry]()
 
-tests += RegexTests.allTests()
+tests += RegExpTests.allTests()
 
 XCTMain(tests)

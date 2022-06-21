@@ -1,4 +1,6 @@
 ## Changelog
+* v2.0.0
+  * Resolve name conflict with Swift's string processing `Regex` (rename to `RegExp`)
 * v1.2.0
   * Support of Swift 5
   * Support of Grapheme Clusters (emojis, arabic languages, etc.)
